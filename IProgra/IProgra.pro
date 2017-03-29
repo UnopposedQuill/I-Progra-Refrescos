@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    botella.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    botella.h
 
 FORMS    += mainwindow.ui
