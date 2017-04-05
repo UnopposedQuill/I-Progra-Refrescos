@@ -1,20 +1,22 @@
 #include "botella.h"
 
 void ListaBotellas::agregar(NodoBotella* nodoAInsertar){
-    if(this->primerBotella == NULL){
-        this->primerBotella = nodoAInsertar;
-        nodoAInsertar->anterior = nodoAInsertar->siguiente = this->primerBotella;
-    }
-    else{
-        if(this->primerBotella->siguiente == this->primerBotella){
-            nodoAInsertar->siguiente = nodoAInsertar->anterior = this->primerBotella;
-            this->primerBotella->siguiente = this->primerBotella->anterior = nodoAInsertar;
+    if(nodoAInsertar != NULL){
+        if(this->primerBotella == NULL){
+            this->primerBotella = nodoAInsertar;
+            nodoAInsertar->anterior = nodoAInsertar->siguiente = this->primerBotella;
         }
         else{
-            nodoAInsertar->siguiente = this->primerBotella->siguiente;
-            this->primerBotella->siguiente->anterior = nodoAInsertar;
-            nodoAInsertar->anterior = this->primerBotella;
-            primerBotella->siguiente = nodoAInsertar;
+            if(this->primerBotella->siguiente == this->primerBotella){
+                nodoAInsertar->siguiente = nodoAInsertar->anterior = this->primerBotella;
+                this->primerBotella->siguiente = this->primerBotella->anterior = nodoAInsertar;
+            }
+            else{
+                nodoAInsertar->siguiente = this->primerBotella->siguiente;
+                this->primerBotella->siguiente->anterior = nodoAInsertar;
+                nodoAInsertar->anterior = this->primerBotella;
+                primerBotella->siguiente = nodoAInsertar;
+            }
         }
     }
 }
@@ -96,14 +98,14 @@ NodoBotella* ListaBotellas::borrar(int valorABorrar) {
  * @param dato El entero que se va a buscar
  * @return Un entero que representa la posición donde está el nodo encontrado, o -1, si el nodo no fue encontrado
  */
-int ListaBotellas::indexOf(int dato) {
+int ListaBotellas::indexOf(int cantidadRefrescoABuscar) {
     if(this->primerBotella == NULL){
         return -1;
     }
     int contador = 0;
     NodoBotella * recorreNodos = this->primerBotella;
     do{
-        if(recorreNodos->botellaNodo->cantidadDeRefresco == dato){
+        if(recorreNodos->botellaNodo->cantidadDeRefresco == cantidadRefrescoABuscar){
             return contador;
         }
         contador++;

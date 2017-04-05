@@ -10,7 +10,13 @@ struct Botella{
 
     int cantidadDeRefresco;
     int probabilidadDeColocar;
+    int probabilidadDeDesecho;
 
+    Botella(int cantidadDeRefresco, int probabilidadDeColocar, int probabilidadDeDesecho){
+        this->cantidadDeRefresco = cantidadDeRefresco;
+        this->probabilidadDeColocar = probabilidadDeColocar;
+        this->probabilidadDeDesecho = probabilidadDeDesecho;
+    }
 };
 
 struct NodoBotella{
@@ -34,7 +40,7 @@ struct ListaBotellas{
 
     ~ListaBotellas();
         int largo();
-        int indexOf(int dato);
+        int indexOf(int cantidadRefrescoABuscar);
         void agregar(NodoBotella * nodoAInsertar);
         void imprimirTodo();
         NodoBotella * get(int i);

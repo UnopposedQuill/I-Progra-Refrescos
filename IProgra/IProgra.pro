@@ -14,9 +14,23 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    botella.cpp
+    botella.cpp \
+    hilo.cpp \
+    hilocolocabotellas.cpp \
+    colas.cpp \
+    hilolimpiabotellas.cpp \
+    hilollenabotellas.cpp \
+    hiloentapador.cpp \
+    hiloinspeccionador.cpp
 
 HEADERS  += mainwindow.h \
-    botella.h
+    botella.h \
+    hilo.h \
+    hilocolocabotellas.h \
+    colas.h \
+    hilolimpiabotellas.h \
+    hilollenabotellas.h \
+    hiloentapador.h \
+    hiloinspeccionador.h
 
 FORMS    += mainwindow.ui
