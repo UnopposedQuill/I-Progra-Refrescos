@@ -1,6 +1,6 @@
 #include "hiloinspeccionador.h"
 
-HiloInspeccionador::HiloInspeccionador(ListaBotellas * botellas,BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar, int tiempoDeInspeccion)
+HiloInspeccionador::HiloInspeccionador(ListaBotellas * botellas, BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar, int tiempoDeInspeccion)
 {
     this->activo = this->pausa = true;
     this->bandaEntrada = bandaEntrada;
@@ -12,8 +12,8 @@ HiloInspeccionador::HiloInspeccionador(ListaBotellas * botellas,BandaBotellas * 
     this->contadoresAprobadas = enterosAprobadas;
     this->contadoresDesechadas = enterosDesechadas;
     for (int i = 0; i < botellas->largo();i++){
-        contadoresAprobadas[i] = 0;
-        contadoresDesechadas[i] = 0;
+        this->contadoresAprobadas[i] = 0;
+        this->contadoresDesechadas[i] = 0;
     }
 
 }
@@ -23,7 +23,7 @@ void HiloInspeccionador::run(){
     while(this->activo){
         mutex.lock();
 
-        if(this->bandaEntrada->primerBotella != NULL && this->bandaColocar->largo() < this->bandaColocar->maximoBotellas){//si se puede realizar el proceso de inspección, entonces, inicia el proceso de inspección
+        if(this->bandaEntrada->primerBotella != NULL){//si se puede realizar el proceso de inspección, entonces, inicia el proceso de inspección
             Botella * botellaNodo = this->bandaEntrada->removerRetornarPrimerBotella()->botellaCola;
             if(botellaNodo != NULL){//por si acaso
                 //ahora tiene que evaluar si desecha o no la botella conseguida

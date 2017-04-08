@@ -27,6 +27,8 @@ void HiloLlenaBotellas::run(){
             this->contadores[this->listaBotellas->indexOf(botellaConseguida->cantidadDeRefresco)]++;//agrego 1 al contador correspondiente
         }
         mutex.unlock();
+
+        sleep(this->tiempoDeLlenado);
         while(this->pausa){
             sleep(1);
         }

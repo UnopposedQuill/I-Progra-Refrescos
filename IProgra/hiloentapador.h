@@ -12,6 +12,7 @@ using namespace std;
 
 class HiloEntapador : public Hilo
 {
+public:
     HiloEntapador(ListaBotellas * botellas,BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar, int tiempoDeEntapado);
     BandaBotellas * bandaEntrada;
     BandaBotellas * bandaColocar;

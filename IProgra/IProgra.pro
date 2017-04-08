@@ -21,7 +21,11 @@ SOURCES += main.cpp\
     hilolimpiabotellas.cpp \
     hilollenabotellas.cpp \
     hiloentapador.cpp \
-    hiloinspeccionador.cpp
+    hiloinspeccionador.cpp \
+    fabrica.cpp \
+    hilotransportador.cpp \
+    configuracion.cpp \
+    fabricawindow.cpp
 
 HEADERS  += mainwindow.h \
     botella.h \
@@ -31,6 +35,11 @@ HEADERS  += mainwindow.h \
     hilolimpiabotellas.h \
     hilollenabotellas.h \
     hiloentapador.h \
-    hiloinspeccionador.h
+    hiloinspeccionador.h \
+    fabrica.h \
+    hilotransportador.h \
+    configuracion.h \
+    fabricawindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    fabricawindow.ui

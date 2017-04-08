@@ -10,7 +10,7 @@ HiloEntapador::HiloEntapador(ListaBotellas * botellas,BandaBotellas * bandaEntra
     int enteros[botellas->largo()];
     this->contadores = enteros;
     for (int i = 0; i < botellas->largo();i++){
-        enteros[i] = 0;
+        this->contadores[i] = 0;
     }
 }
 
@@ -27,9 +27,9 @@ void HiloEntapador::run(){
             this->contadores[this->listaBotellas->indexOf(botellaConseguida->cantidadDeRefresco)]++;//agrego 1 al contador correspondiente
         }
         mutex.unlock();
+        sleep(this->tiempoDeEntapado);
         while(this->pausa){
             sleep(1);
         }
     }
 }
-
