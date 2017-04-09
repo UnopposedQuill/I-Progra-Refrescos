@@ -3,8 +3,9 @@
 
 #include <QMainWindow>
 #include <QDebug>
-#include "configuracion.h"
-#include "fabrica.h"
+#include "configuracion.h"//para poder crear el paquete de parámetros
+#include "fabrica.h"//para poder crear una nueva fábrica
+#include "fabricawindow.h"//para que pueda crear una nueva ventana
 
 namespace Ui {
 class MainWindow;

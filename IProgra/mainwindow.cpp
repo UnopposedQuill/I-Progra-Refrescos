@@ -60,4 +60,7 @@ void MainWindow::iniciarSimulacion(){
     //ahora agrego todos los datos a la configuración
     Configuracion * config = new Configuracion(listaBotellas,this->ui->tiempoColocacion->text().toInt(),this->ui->tiempoLimpieza->text().toInt(),this->ui->tiempoLlenado1->text().toInt(),this->ui->tiempoLlenado2->text().toInt(), this->ui->tiempoEntapado->text().toInt(), this->ui->tiempoInspeccion->text().toInt(), this->ui->capacidadColocadas->text().toInt(), this->ui->capacidadLimpias1->text().toInt(), this->ui->capacidadLimpias2->text().toInt(), this->ui->capacidadLlenas->text().toInt(), this->ui->capacidadEntapadas->text().toInt());
     Fabrica * fabrica = new Fabrica(config);
+    FabricaWindow * ventanaSimulacion = new FabricaWindow(NULL, fabrica);
+    ventanaSimulacion->show();
+    this->close();
 }

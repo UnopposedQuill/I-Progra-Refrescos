@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/botones">
+        <file>botones/Flecha Derecha.jpg</file>
+    </qresource>
+</RCC>

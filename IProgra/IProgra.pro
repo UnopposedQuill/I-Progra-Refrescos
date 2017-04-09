@@ -43,3 +43,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     fabricawindow.ui
+
+RESOURCES += \
+    recursos.qrc
