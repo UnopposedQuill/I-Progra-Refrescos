@@ -6,11 +6,7 @@ HiloTransportador::HiloTransportador(ListaBotellas * botellas, BandaBotellas * b
     this->bandaEntrada = bandaEntrada;
     this->bandaColocar = bandaColocar;
     this->listaBotellas = botellas;
-    int enterosAprobadas[botellas->largo()];
-    this->contadores = enterosAprobadas;
-    for (int i = 0; i < botellas->largo();i++){
-        this->contadores[i] = 0;
-    }
+    this->contadores =(int*) calloc(this->listaBotellas->largo(),sizeof(int));
     this->hiloInspeccionadorASustituir = hiloInspeccionadorASustituir;
 }
 

@@ -7,11 +7,7 @@ HiloEntapador::HiloEntapador(ListaBotellas * botellas,BandaBotellas * bandaEntra
     this->bandaColocar = bandaColocar;
     this->listaBotellas = botellas;
     this->tiempoDeEntapado = tiempoDeEntapado;
-    int enteros[botellas->largo()];
-    this->contadores = enteros;
-    for (int i = 0; i < botellas->largo();i++){
-        this->contadores[i] = 0;
-    }
+    this->contadores =(int*) calloc(this->listaBotellas->largo(),sizeof(int));
 }
 
 void HiloEntapador::run(){

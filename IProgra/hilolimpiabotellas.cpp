@@ -8,11 +8,7 @@ HiloLimpiaBotellas::HiloLimpiaBotellas(ListaBotellas *botellas, BandaBotellas * 
     this->bandaColocar2 = bandaColocar2;
     this->listaBotellas = botellas;
     this->tiempoDeLimpieza = tiempoDeLimpieza;
-    int enteros[botellas->largo()];
-    this->contadores = enteros;
-    for (int i = 0; i < botellas->largo();i++){
-        enteros[i] = 0;
-    }
+    this->contadores =(int*) calloc(this->listaBotellas->largo(),sizeof(int));
 }
 
 void HiloLimpiaBotellas::run(){

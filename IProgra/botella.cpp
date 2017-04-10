@@ -28,8 +28,9 @@ void ListaBotellas::imprimirTodo() {
         NodoBotella * recorreNodos = this->primerBotella;
         do{
             cout <<"Botella:" <<endl;
-            cout <<"Cantidad de Refresco: " <<recorreNodos->botellaNodo->cantidadDeRefresco <<" ";
-            cout <<"Probabilidad de ser colocada: " <<recorreNodos->botellaNodo->probabilidadDeColocar <<endl;
+            cout <<"Cantidad de Refresco: " <<recorreNodos->botellaNodo->cantidadDeRefresco <<" ml" <<endl;
+            cout <<"Probabilidad de ser colocada: " <<recorreNodos->botellaNodo->probabilidadDeColocar <<"%" <<endl;
+            cout <<"Probabilidad de ser desechada: " <<recorreNodos->botellaNodo->probabilidadDeDesecho <<"%" <<endl;
             recorreNodos = recorreNodos->siguiente;
         }while(recorreNodos != NULL && recorreNodos != this->primerBotella);
     }
@@ -37,7 +38,16 @@ void ListaBotellas::imprimirTodo() {
 }
 
 int ListaBotellas::largo() {
-    return 0;
+    if(this->primerBotella == NULL){
+        return 0;
+    }
+    NodoBotella * recorreNodos = this->primerBotella;
+    int cuentaBotellas = 0;
+    do{
+        cuentaBotellas++;
+        recorreNodos = recorreNodos->siguiente;
+    }while(recorreNodos != this->primerBotella);
+    return cuentaBotellas;
 }
 
 ListaBotellas::~ListaBotellas() {

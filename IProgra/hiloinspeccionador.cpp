@@ -7,15 +7,8 @@ HiloInspeccionador::HiloInspeccionador(ListaBotellas * botellas, BandaBotellas *
     this->bandaColocar = bandaColocar;
     this->listaBotellas = botellas;
     this->tiempoDeInspeccion = tiempoDeInspeccion;
-    int enterosAprobadas[botellas->largo()];
-    int enterosDesechadas[botellas->largo()];//2 sets de enteros, pues se necesitan 2 sets de contadores, 1 para desechadas, y 1 para aprobadas
-    this->contadoresAprobadas = enterosAprobadas;
-    this->contadoresDesechadas = enterosDesechadas;
-    for (int i = 0; i < botellas->largo();i++){
-        this->contadoresAprobadas[i] = 0;
-        this->contadoresDesechadas[i] = 0;
-    }
-
+    this->contadoresAprobadas =(int*) calloc(this->listaBotellas->largo(),sizeof(int));
+    this->contadoresDesechadas =(int*) calloc(this->listaBotellas->largo(),sizeof(int));
 }
 
 void HiloInspeccionador::run(){

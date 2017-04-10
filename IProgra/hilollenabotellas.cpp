@@ -7,11 +7,7 @@ HiloLlenaBotellas::HiloLlenaBotellas(ListaBotellas * botellas,BandaBotellas * ba
     this->bandaColocar = bandaColocar;
     this->listaBotellas = botellas;
     this->tiempoDeLlenado = tiempoDeLlenado;
-    int enteros[botellas->largo()];
-    this->contadores = enteros;
-    for (int i = 0; i < botellas->largo();i++){
-        enteros[i] = 0;
-    }
+    this->contadores =(int*) calloc(this->listaBotellas->largo(),sizeof(int));
 }
 
 void HiloLlenaBotellas::run(){
