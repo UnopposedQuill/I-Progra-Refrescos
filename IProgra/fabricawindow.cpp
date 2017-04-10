@@ -40,6 +40,9 @@ FabricaWindow::FabricaWindow(QWidget *parent, Fabrica *fabrica) : QMainWindow(pa
         this->ui->contadoresInspeccionador->setItem(i,1,new QTableWidgetItem(QString::number(this->fabrica->hiloInspeccionador->contadoresAprobadas[i])));
         this->ui->contadoresInspeccionador->setItem(i,2,new QTableWidgetItem(QString::number(this->fabrica->hiloInspeccionador->contadoresDesechadas[i])));
         this->ui->contadoresInspeccionador->setItem(i,3,new QTableWidgetItem(QString::number(this->fabrica->listaBotellas->get(i)->botellaNodo->probabilidadDeDesecho)));
+
+        this->hiloActualizador = new HiloActualizador(this);
+        this->hiloActualizador->activo = this->hiloActualizador->pausa = true;
     }
 }
 
@@ -55,6 +58,9 @@ FabricaWindow::~FabricaWindow()
  */
 void FabricaWindow::iniciarSimulacion(){
     this->fabrica->arrancarTodo();
+    this->hiloActualizador->activo = true;
+    this->hiloActualizador->pausa = false;
+    this->hiloActualizador->start();
 }
 
 /**
@@ -64,6 +70,7 @@ void FabricaWindow::iniciarSimulacion(){
  */
 void FabricaWindow::pausarSimulacion(){
     this->fabrica->pausarTodo();
+    this->hiloActualizador->activo = this->hiloActualizador->pausa = true;
 }
 
 /**
@@ -73,6 +80,8 @@ void FabricaWindow::pausarSimulacion(){
  */
 void FabricaWindow::reiniciarSimulacion(){
     this->fabrica->pausarTodo();//pauso todos los hilos para que no modifiquen nada
+    this->hiloActualizador->activo = true;
+    this->hiloActualizador->pausa = false;
     this->fabrica->reiniciarTodo();//luego reinicio los contadores
 }
 
@@ -83,4 +92,32 @@ void FabricaWindow::reiniciarSimulacion(){
  */
 void FabricaWindow::pararSimulacion(){
     this->fabrica->pararTodo();
+    this->hiloActualizador->activo = this->hiloActualizador->pausa = false;
+}
+
+/**
+ * @brief FabricaWindow::actualizarDatos
+ * Esta función lo que hace es enviarle una señal para que la ventana actualice sus propios datos
+ */
+void FabricaWindow::actualizarDatos(){
+
+    for(int i = 0; i < this->fabrica->listaBotellas->largo(); i++){
+        this->ui->contadoresColocador->item(i,1)->setText(QString::number(this->fabrica->hiloColocaBotellas->contadores[i]));//coloco la cantidad de botellas colocadas respectivas
+        this->ui->infoBandaColocadas->item(0,0)->setText(QString::number(this->fabrica->bandaColocadas->largo()));//coloco la cantidad de botellas actualmente en la banda
+        this->ui->infoBandaColocadas->item(0,1)->setText(QString::number(this->fabrica->bandaColocadas->maximoBotellas));//coloco el máximo de botellas de la banda
+        this->ui->contadoresLimpiador->item(i,1)->setText(QString::number(this->fabrica->hiloLimpiaBotellas->contadores[i]));//coloco la cantidad de botellas limpiadas respectivas
+        this->ui->infoBandaLimpias1->item(0,0)->setText(QString::number(this->fabrica->bandaLimpiadas1->largo()));//coloco la cantidad de botellas actualmente en la banda
+        this->ui->infoBandaLimpias1->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas1->maximoBotellas));//coloco el máximo de botellas de la banda
+        this->ui->infoBandaLimpias2->item(0,0)->setText(QString::number(this->fabrica->bandaLimpiadas2->largo()));//coloco la cantidad de botellas actualmente en la banda
+        this->ui->infoBandaLimpias2->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas2->maximoBotellas));//coloco el máximo de botellas de la banda
+        this->ui->contadoresLlenador1->item(i,1)->setText(QString::number(this->fabrica->hilollenaBotellas1->contadores[i]));//coloco la cantidad de botellas llenas respectivas
+        this->ui->contadoresLlenador2->item(i,1)->setText(QString::number(this->fabrica->hilollenaBotellas2->contadores[i]));//coloco la cantidad de botellas llenas respectivas
+        this->ui->infoBandaLlenas->item(0,0)->setText(QString::number(this->fabrica->bandaLlenadas->largo()));
+        this->ui->infoBandaLlenas->item(0,1)->setText(QString::number(this->fabrica->bandaLlenadas->maximoBotellas));
+        this->ui->contadoresEntapador->item(i,1)->setText(QString::number(this->fabrica->hiloEntapador->contadores[i]));//coloco la cantidad de botellas entapadas respectivas
+        this->ui->infoBandaEntapadas->item(0,0)->setText(QString::number(this->fabrica->bandaEntapadas->largo()));
+        this->ui->infoBandaEntapadas->item(0,1)->setText(QString::number(this->fabrica->bandaEntapadas->maximoBotellas));
+        this->ui->contadoresInspeccionador->item(i,1)->setText(QString::number(this->fabrica->hiloInspeccionador->contadoresAprobadas[i]));
+        this->ui->contadoresInspeccionador->item(i,2)->setText(QString::number(this->fabrica->hiloInspeccionador->contadoresDesechadas[i]));
+    }
 }

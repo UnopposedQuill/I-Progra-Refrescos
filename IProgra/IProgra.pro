@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     fabrica.cpp \
     hilotransportador.cpp \
     configuracion.cpp \
-    fabricawindow.cpp
+    fabricawindow.cpp \
+    hiloactualizador.cpp
 
 HEADERS  += mainwindow.h \
     botella.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     fabrica.h \
     hilotransportador.h \
     configuracion.h \
-    fabricawindow.h
+    fabricawindow.h \
+    hiloactualizador.h
 
 FORMS    += mainwindow.ui \
     fabricawindow.ui

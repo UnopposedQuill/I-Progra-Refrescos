@@ -28,7 +28,7 @@ void HiloColocaBotellas::run(){
                 break;
             }
         }
-        this->listaBotellas->agregar(new NodoBotella(botellaAColocar));//agrega la botella a la cola
+        this->bandaColocar->agregarNodoAlFinal(new NodoBotellaCola(botellaAColocar));//agrega la botella a la cola
         this->contadores[indiceBotella]++;//aumenta el contador correspondiente a la botella tomada
         mutex.unlock();//desbloquea
 
