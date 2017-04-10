@@ -26,7 +26,9 @@ class Ui_FabricaWindow
 {
 public:
     QWidget *centralwidget;
-    QPushButton *pushButton;
+    QPushButton *iniciarSimulacion;
+    QPushButton *reiniciarSimulacion;
+    QPushButton *pararSimulacion;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -37,17 +39,31 @@ public:
         FabricaWindow->resize(800, 600);
         centralwidget = new QWidget(FabricaWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(40, 501, 51, 51));
+        iniciarSimulacion = new QPushButton(centralwidget);
+        iniciarSimulacion->setObjectName(QStringLiteral("iniciarSimulacion"));
+        iniciarSimulacion->setGeometry(QRect(40, 501, 51, 51));
         QFont font;
         font.setPointSize(9);
-        pushButton->setFont(font);
-        pushButton->setLayoutDirection(Qt::LeftToRight);
+        iniciarSimulacion->setFont(font);
+        iniciarSimulacion->setLayoutDirection(Qt::LeftToRight);
         QIcon icon;
-        icon.addFile(QStringLiteral("../../Flecha Derecha.jpg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon);
-        pushButton->setIconSize(QSize(50, 50));
+        icon.addFile(QStringLiteral(":/botones/botones/Flecha Derecha.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        iniciarSimulacion->setIcon(icon);
+        iniciarSimulacion->setIconSize(QSize(50, 50));
+        reiniciarSimulacion = new QPushButton(centralwidget);
+        reiniciarSimulacion->setObjectName(QStringLiteral("reiniciarSimulacion"));
+        reiniciarSimulacion->setGeometry(QRect(100, 500, 51, 51));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/botones/botones/Flecha Reiniciar.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        reiniciarSimulacion->setIcon(icon1);
+        reiniciarSimulacion->setIconSize(QSize(50, 50));
+        pararSimulacion = new QPushButton(centralwidget);
+        pararSimulacion->setObjectName(QStringLiteral("pararSimulacion"));
+        pararSimulacion->setGeometry(QRect(160, 500, 51, 51));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/botones/botones/Cuadro Parar.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        pararSimulacion->setIcon(icon2);
+        pararSimulacion->setIconSize(QSize(50, 50));
         FabricaWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(FabricaWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -65,7 +81,9 @@ public:
     void retranslateUi(QMainWindow *FabricaWindow)
     {
         FabricaWindow->setWindowTitle(QApplication::translate("FabricaWindow", "F\303\241brica", 0));
-        pushButton->setText(QString());
+        iniciarSimulacion->setText(QString());
+        reiniciarSimulacion->setText(QString());
+        pararSimulacion->setText(QString());
     } // retranslateUi
 
 };

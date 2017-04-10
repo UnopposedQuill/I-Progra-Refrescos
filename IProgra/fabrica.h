@@ -16,6 +16,10 @@
 
 using namespace std;
 
+/**
+ * @brief The Fabrica struct
+ * Esta estructura conforma todos las estructuras del proyecto y las encapsula en una sola estructura fácil de controlar
+ */
 struct Fabrica{
 
     ListaBotellas * listaBotellas;//la lista de las botellas
@@ -42,6 +46,11 @@ struct Fabrica{
     */
     HiloTransportador * hiloTransportador;
 
+    /**
+     * @brief Fabrica
+     * Este es el constructor oficial de la estructura, este recibe un paquete de parámetros, los cuales lee y toma como propios
+     * @param config El paquete de parámetros con el cual se creará la fábrica
+     */
     Fabrica(Configuracion * config){
         this->bandaColocadas = new BandaBotellas(config->capacidadColocadas);
         this->bandaLimpiadas1 = new BandaBotellas(config->capacidadLimpiadas1);
@@ -62,6 +71,10 @@ struct Fabrica{
         //ya creé y configuré todo
     }
 
+    /**
+     * @brief arrancarTodo
+     * Esta función se encarga de poner todos los hilos en capacidad de arrancar y luego los inicia
+     */
     void arrancarTodo(){
         //primero me aseguro de que todos los hilos estén en posibilidad de arrancar y funcionar
         this->hiloColocaBotellas->activo = true;
@@ -87,6 +100,59 @@ struct Fabrica{
         this->hiloEntapador->start();
         this->hiloInspeccionador->start();
         this->hiloTransportador->start();
+    }
+
+    /**
+     * @brief pausarTodo
+     * Esta función coloca a todos los hilos en un sólo estado de pausa
+     */
+    void pausarTodo(){
+        //pongo todos los hilos con activo = pausa = true
+        this->hiloColocaBotellas->activo = this->hiloColocaBotellas->pausa = true;
+        this->hiloLimpiaBotellas->activo = this->hiloLimpiaBotellas->pausa = true;
+        this->hilollenaBotellas1->activo = this->hilollenaBotellas1->pausa = true;
+        this->hilollenaBotellas2->activo = this->hilollenaBotellas2->pausa = true;
+        this->hiloEntapador->activo = this->hiloEntapador->pausa = true;
+        this->hiloTransportador->activo = this->hiloTransportador->pausa = true;//recordar que si este no lo pauso, las botellas "se inspeccionan"
+        this->hiloInspeccionador->activo = this->hiloInspeccionador->pausa = true;//ahora pauso este
+
+    }
+
+    /**
+     * @brief reiniciarTodo
+     * Esta función reinicia los contadores únicamente
+     */
+    void reiniciarTodo(){
+        //reinicio todos los contadores
+        QMutex mutex;//por si acaso
+
+        mutex.lock();//los bloqueos nunca están de más
+        for(int i = 0; i < this->hiloColocaBotellas->listaBotellas->largo();i++){//necesito recorrer los contadores para cada una de las botellas en la lista de botellas
+            this->hiloColocaBotellas->contadores[i] = 0;//limpio todos los contadores de la estructura
+            this->hiloLimpiaBotellas->contadores[i] = 0;
+            this->hilollenaBotellas1->contadores[i] = 0;
+            this->hilollenaBotellas2->contadores[i] = 0;
+            this->hiloEntapador->contadores[i] = 0;
+            this->hiloInspeccionador->contadoresAprobadas[i] = 0;
+            this->hiloInspeccionador->contadoresDesechadas[i] = 0;
+            this->hiloTransportador->contadores[i] = 0;
+        }
+        mutex.unlock();
+    }
+
+    /**
+     * @brief pararTodo
+     * Esta función pone a todos los hilos en un solo estado de inactividad
+     */
+    void pararTodo(){
+        //pongo todos los hilos con activo = pausa = true
+        this->hiloColocaBotellas->activo = this->hiloColocaBotellas->pausa = false;
+        this->hiloLimpiaBotellas->activo = this->hiloLimpiaBotellas->pausa = false;
+        this->hilollenaBotellas1->activo = this->hilollenaBotellas1->pausa = false;
+        this->hilollenaBotellas2->activo = this->hilollenaBotellas2->pausa = false;
+        this->hiloEntapador->activo = this->hiloEntapador->pausa = false;
+        this->hiloTransportador->activo = this->hiloTransportador->pausa = false;//recordar que si este no lo pauso, las botellas "se inspeccionan"
+        this->hiloInspeccionador->activo = this->hiloInspeccionador->pausa = false;
     }
 
 };

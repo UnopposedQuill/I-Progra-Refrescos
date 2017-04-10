@@ -176,7 +176,11 @@ public:
         capacidadEntapadas->setGeometry(QRect(700, 310, 181, 22));
         Inicio = new QPushButton(centralWidget);
         Inicio->setObjectName(QStringLiteral("Inicio"));
-        Inicio->setGeometry(QRect(720, 340, 141, 61));
+        Inicio->setGeometry(QRect(700, 340, 161, 61));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/botones/botones/Flecha Derecha.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        Inicio->setIcon(icon);
+        Inicio->setIconSize(QSize(30, 30));
         label_13 = new QLabel(centralWidget);
         label_13->setObjectName(QStringLiteral("label_13"));
         label_13->setGeometry(QRect(190, 10, 541, 31));

@@ -61,7 +61,8 @@ SOURCES       = ../IProgra/main.cpp \
 		../IProgra/fabrica.cpp \
 		../IProgra/hilotransportador.cpp \
 		../IProgra/configuracion.cpp \
-		../IProgra/fabricawindow.cpp moc_mainwindow.cpp \
+		../IProgra/fabricawindow.cpp qrc_recursos.cpp \
+		moc_mainwindow.cpp \
 		moc_fabricawindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -77,6 +78,7 @@ OBJECTS       = main.o \
 		hilotransportador.o \
 		configuracion.o \
 		fabricawindow.o \
+		qrc_recursos.o \
 		moc_mainwindow.o \
 		moc_fabricawindow.o
 DIST          = /opt/Qt/5.7/gcc_64/mkspecs/features/spec_pre.prf \
@@ -415,6 +417,7 @@ Makefile: ../IProgra/IProgra.pro /opt/Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf
 		/opt/Qt/5.7/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.7/gcc_64/mkspecs/features/lex.prf \
 		../IProgra/IProgra.pro \
+		../IProgra/recursos.qrc \
 		/opt/Qt/5.7/gcc_64/lib/libQt5Widgets.prl \
 		/opt/Qt/5.7/gcc_64/lib/libQt5Gui.prl \
 		/opt/Qt/5.7/gcc_64/lib/libQt5Core.prl
@@ -569,6 +572,7 @@ Makefile: ../IProgra/IProgra.pro /opt/Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf
 /opt/Qt/5.7/gcc_64/mkspecs/features/yacc.prf:
 /opt/Qt/5.7/gcc_64/mkspecs/features/lex.prf:
 ../IProgra/IProgra.pro:
+../IProgra/recursos.qrc:
 /opt/Qt/5.7/gcc_64/lib/libQt5Widgets.prl:
 /opt/Qt/5.7/gcc_64/lib/libQt5Gui.prl:
 /opt/Qt/5.7/gcc_64/lib/libQt5Core.prl:
@@ -586,6 +590,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../IProgra/recursos.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../IProgra/mainwindow.h ../IProgra/botella.h ../IProgra/hilo.h ../IProgra/hilocolocabotellas.h ../IProgra/colas.h ../IProgra/hilolimpiabotellas.h ../IProgra/hilollenabotellas.h ../IProgra/hiloentapador.h ../IProgra/hiloinspeccionador.h ../IProgra/fabrica.h ../IProgra/hilotransportador.h ../IProgra/configuracion.h ../IProgra/fabricawindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../IProgra/main.cpp ../IProgra/mainwindow.cpp ../IProgra/botella.cpp ../IProgra/hilo.cpp ../IProgra/hilocolocabotellas.cpp ../IProgra/colas.cpp ../IProgra/hilolimpiabotellas.cpp ../IProgra/hilollenabotellas.cpp ../IProgra/hiloentapador.cpp ../IProgra/hiloinspeccionador.cpp ../IProgra/fabrica.cpp ../IProgra/hilotransportador.cpp ../IProgra/configuracion.cpp ../IProgra/fabricawindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../IProgra/mainwindow.ui ../IProgra/fabricawindow.ui $(DISTDIR)/
@@ -612,8 +617,13 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_recursos.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_recursos.cpp
+qrc_recursos.cpp: ../IProgra/recursos.qrc \
+		/opt/Qt/5.7/gcc_64/bin/rcc
+	/opt/Qt/5.7/gcc_64/bin/rcc -name recursos ../IProgra/recursos.qrc -o qrc_recursos.cpp
+
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_fabricawindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_fabricawindow.cpp
@@ -732,6 +742,7 @@ moc_mainwindow.cpp: /opt/Qt/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		../IProgra/hiloentapador.h \
 		../IProgra/hiloinspeccionador.h \
 		../IProgra/hilotransportador.h \
+		../IProgra/fabricawindow.h \
 		../IProgra/mainwindow.h \
 		/opt/Qt/5.7/gcc_64/bin/moc
 	/opt/Qt/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt/5.7/gcc_64/mkspecs/linux-g++ -I'/home/esteban/Descargas/Darkraft/Universidad/En proceso/ESTRUD/II Semestre/Proyectos Programados/I Progra/I-Progra-Refrescos/IProgra' -I/opt/Qt/5.7/gcc_64/include -I/opt/Qt/5.7/gcc_64/include/QtWidgets -I/opt/Qt/5.7/gcc_64/include/QtGui -I/opt/Qt/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/6.3.1 -I/usr/include/c++/6.3.1/x86_64-pc-linux-gnu -I/usr/include/c++/6.3.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed -I/usr/include ../IProgra/mainwindow.h -o moc_mainwindow.cpp
@@ -874,7 +885,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -994,6 +1005,7 @@ main.o: ../IProgra/main.cpp ../IProgra/mainwindow.h \
 		../IProgra/hiloentapador.h \
 		../IProgra/hiloinspeccionador.h \
 		../IProgra/hilotransportador.h \
+		../IProgra/fabricawindow.h \
 		/opt/Qt/5.7/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt/5.7/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt/5.7/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1119,6 +1131,7 @@ mainwindow.o: ../IProgra/mainwindow.cpp ../IProgra/mainwindow.h \
 		../IProgra/hiloentapador.h \
 		../IProgra/hiloinspeccionador.h \
 		../IProgra/hilotransportador.h \
+		../IProgra/fabricawindow.h \
 		ui_mainwindow.h \
 		/opt/Qt/5.7/gcc_64/include/QtCore/QVariant \
 		/opt/Qt/5.7/gcc_64/include/QtWidgets/QAction \
@@ -1755,8 +1768,50 @@ fabricawindow.o: ../IProgra/fabricawindow.cpp ../IProgra/fabricawindow.h \
 		../IProgra/hiloinspeccionador.h \
 		../IProgra/hilotransportador.h \
 		../IProgra/configuracion.h \
-		ui_fabricawindow.h
+		ui_fabricawindow.h \
+		/opt/Qt/5.7/gcc_64/include/QtCore/QVariant \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QAction \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qaction.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qactiongroup.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QApplication \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qapplication.h \
+		/opt/Qt/5.7/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt/5.7/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt/5.7/gcc_64/include/QtGui/qguiapplication.h \
+		/opt/Qt/5.7/gcc_64/include/QtGui/qinputmethod.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QButtonGroup \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QHeaderView \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qheaderview.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qframe.h \
+		/opt/Qt/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.7/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt/5.7/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt/5.7/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qslider.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qstyle.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QMenuBar \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qmenubar.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qmenu.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QPushButton \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QStatusBar \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/qstatusbar.h \
+		/opt/Qt/5.7/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fabricawindow.o ../IProgra/fabricawindow.cpp
+
+qrc_recursos.o: qrc_recursos.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_recursos.o qrc_recursos.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

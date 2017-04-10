@@ -14,7 +14,7 @@
    <string>Fábrica</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="iniciarSimulacion">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -35,8 +35,77 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset>
-      <normaloff>../../Flecha Derecha.jpg</normaloff>../../Flecha Derecha.jpg</iconset>
+     <iconset resource="recursos.qrc">
+      <normaloff>:/botones/botones/Flecha Derecha.jpg</normaloff>:/botones/botones/Flecha Derecha.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reiniciarSimulacion">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>500</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="recursos.qrc">
+      <normaloff>:/botones/botones/Flecha Reiniciar.jpg</normaloff>:/botones/botones/Flecha Reiniciar.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pararSimulacion">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>500</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="recursos.qrc">
+      <normaloff>:/botones/botones/Cuadro Parar.jpg</normaloff>:/botones/botones/Cuadro Parar.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pausarSimulacion">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>500</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="recursos.qrc">
+      <normaloff>:/botones/botones/pausa azul.jpg</normaloff>:/botones/botones/pausa azul.jpg</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -58,6 +127,79 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
- <connections/>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>iniciarSimulacion</sender>
+   <signal>clicked()</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>iniciarSimulacion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>458</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pausarSimulacion</sender>
+   <signal>clicked()</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>pausarSimulacion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>554</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>reiniciarSimulacion</sender>
+   <signal>clicked()</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>reiniciarSimulacion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>535</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>245</x>
+     <y>481</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pararSimulacion</sender>
+   <signal>clicked()</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>pararSimulacion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>543</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>iniciarSimulacion()</slot>
+  <slot>pausarSimulacion()</slot>
+  <slot>reiniciarSimulacion()</slot>
+  <slot>pararSimulacion()</slot>
+ </slots>
 </ui>

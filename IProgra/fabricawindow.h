@@ -17,6 +17,12 @@ class FabricaWindow : public QMainWindow
 {
     Q_OBJECT
 
+public slots:
+    void iniciarSimulacion();
+    void pausarSimulacion();
+    void reiniciarSimulacion();
+    void pararSimulacion();
+
 public:
     explicit FabricaWindow(QWidget * parent = 0, Fabrica * fabrica = NULL);
     ~FabricaWindow();

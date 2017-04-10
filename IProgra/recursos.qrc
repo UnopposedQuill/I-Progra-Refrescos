@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/botones">
         <file>botones/Flecha Derecha.jpg</file>
+        <file>botones/Flecha Reiniciar.jpg</file>
+        <file>botones/Cuadro Parar.jpg</file>
+        <file>botones/pausa azul.jpg</file>
     </qresource>
 </RCC>
