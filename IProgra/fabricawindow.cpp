@@ -6,6 +6,14 @@ FabricaWindow::FabricaWindow(QWidget *parent, Fabrica *fabrica) : QMainWindow(pa
     this->fabrica = fabrica;
     //ahora tengo que modificar todos los contadores y números dentro de la ventana
 
+    //tengo que colocar la velocidad a la que va cada hilo
+    this->ui->velocidadColocador->setText(QString::number(this->fabrica->hiloColocaBotellas->tiempoDeCarga));
+    this->ui->velocidadLimpiador->setText(QString::number(this->fabrica->hiloLimpiaBotellas->tiempoDeLimpieza));
+    this->ui->velocidadLlenador1->setText(QString::number(this->fabrica->hilollenaBotellas1->tiempoDeLlenado));
+    this->ui->velocidadLlenador2->setText(QString::number(this->fabrica->hilollenaBotellas2->tiempoDeLlenado));
+    this->ui->velocidadEntapador->setText(QString::number(this->fabrica->hiloEntapador->tiempoDeEntapado));
+    this->ui->velocidadInspeccionador->setText(QString::number(this->fabrica->hiloInspeccionador->tiempoDeInspeccion));
+
     //tengo que agregar una cantidad N de filas a cada tabla de la ventana donde N es la cantidad de botellas
     this->ui->contadoresColocador->setRowCount(this->fabrica->listaBotellas->largo());
     this->ui->contadoresLimpiador->setRowCount(this->fabrica->listaBotellas->largo());
@@ -101,6 +109,7 @@ void FabricaWindow::pararSimulacion(){
  */
 void FabricaWindow::actualizarDatos(){
 
+    //coloco todos los contadores
     for(int i = 0; i < this->fabrica->listaBotellas->largo(); i++){
         this->ui->contadoresColocador->item(i,1)->setText(QString::number(this->fabrica->hiloColocaBotellas->contadores[i]));//coloco la cantidad de botellas colocadas respectivas
         this->ui->infoBandaColocadas->item(0,0)->setText(QString::number(this->fabrica->bandaColocadas->largo()));//coloco la cantidad de botellas actualmente en la banda
@@ -120,4 +129,8 @@ void FabricaWindow::actualizarDatos(){
         this->ui->contadoresInspeccionador->item(i,1)->setText(QString::number(this->fabrica->hiloInspeccionador->contadoresAprobadas[i]));
         this->ui->contadoresInspeccionador->item(i,2)->setText(QString::number(this->fabrica->hiloInspeccionador->contadoresDesechadas[i]));
     }
+}
+
+void FabricaWindow::cambiarParametros(){
+
 }

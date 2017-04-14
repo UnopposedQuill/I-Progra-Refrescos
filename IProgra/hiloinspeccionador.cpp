@@ -21,6 +21,7 @@ void HiloInspeccionador::run(){
             if(botellaNodo != NULL){//por si acaso
                 //ahora tiene que evaluar si desecha o no la botella conseguida
                 std::mt19937_64 generadorDeNumeros;//un generador de números
+                generadorDeNumeros.seed(time(NULL));
                 std::uniform_int_distribution<int> aleatorizadorEnteros(0, 100);//una clase que sabe ordenar números
                 int aleatorio = aleatorizadorEnteros(generadorDeNumeros);//hago que el generador le pase un número al aleatorizador, para que
                 //pueda retornar un número aleatorio
@@ -33,7 +34,6 @@ void HiloInspeccionador::run(){
                 else{//la desechó :(
                     //solo incremento el contador, sin mover la botella
                     this->contadoresDesechadas[this->listaBotellas->indexOf(botellaNodo->cantidadDeRefresco)]++;
-                    delete botellaNodo;//borro la botella
                 }
             }
         }

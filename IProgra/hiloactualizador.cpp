@@ -7,6 +7,8 @@ HiloActualizador::HiloActualizador(FabricaWindow *ventanaAActualizar)
 }
 
 void HiloActualizador::run(){
+    qRegisterMetaType<QVector<int> >("QVector<int>");//esto es para poder conectarse bien con la ventana de la fábrica
+
     while(this->activo){
 
         sleep(1);

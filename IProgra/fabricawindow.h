@@ -25,6 +25,7 @@ public slots:
     void reiniciarSimulacion();
     void pararSimulacion();
     void actualizarDatos();
+    void cambiarParametros();
 
 public:
     explicit FabricaWindow(QWidget * parent = 0, Fabrica * fabrica = NULL);

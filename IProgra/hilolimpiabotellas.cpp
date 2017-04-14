@@ -23,9 +23,11 @@ void HiloLimpiaBotellas::run(){
             if(botellaEntrada != NULL){//por si acaso
 
                 std::mt19937_64 generadorDeNumeros;//un generador de números
+                generadorDeNumeros.seed(time(NULL));
                 std::uniform_int_distribution<int> aleatorizadorEnteros(0, 1);//una clase que sabe ordenar números
                 int aleatorio = aleatorizadorEnteros(generadorDeNumeros);//hago que el generador le pase un número al aleatorizador, para que
-                if(aleatorio == 0){
+                //sea capaz de generar un aleatorio
+                if(aleatorio == 1){
                     this->bandaColocar1->agregarNodoAlFinal(new NodoBotellaCola(botellaEntrada));//agrego la botella a la primera cola de salida
                 }
                 else{

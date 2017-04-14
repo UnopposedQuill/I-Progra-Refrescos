@@ -16,7 +16,8 @@ void HiloColocaBotellas::run(){
 
         mutex.lock();//bloquea el cpu para que ningún otro hilo se ejecute hasta que este se desbloquee
         std::mt19937_64 generadorDeNumeros;//un generador de números
-        std::uniform_int_distribution<int> aleatorizadorEnteros(0, 100);//una clase que sabe ordenar números
+        generadorDeNumeros.seed(time(NULL));
+        std::uniform_int_distribution<int> aleatorizadorEnteros(0, 99);//una clase que sabe ordenar números
         int aleatorio = aleatorizadorEnteros(generadorDeNumeros);//hago que el generador le pase un número al aleatorizador, para que
         //pueda retornar un número aleatorio
         Botella * botellaAColocar = NULL;//la botella que se va a insertar

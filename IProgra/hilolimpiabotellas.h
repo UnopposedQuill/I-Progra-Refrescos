@@ -5,6 +5,7 @@
 #include <iostream>
 #include <QMutex>
 #include <random>
+#include <QDebug>
 #include "hilo.h"
 #include "botella.h"
 #include "colas.h"

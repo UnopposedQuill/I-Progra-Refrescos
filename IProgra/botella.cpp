@@ -120,7 +120,7 @@ int ListaBotellas::indexOf(int cantidadRefrescoABuscar) {
         }
         contador++;
         recorreNodos = recorreNodos->siguiente;
-    }while(recorreNodos->siguiente != this->primerBotella);
+    }while(recorreNodos != this->primerBotella);
     return -1;
 }
 
