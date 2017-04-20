@@ -913,6 +913,71 @@
      </property>
     </item>
    </widget>
+   <widget class="QLabel" name="bandaColocadas">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>100</y>
+      <width>181</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bandaLimpias1">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>140</y>
+      <width>181</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bandaLimpias2">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>140</y>
+      <width>181</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bandaLlenas">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>360</y>
+      <width>181</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bandaEntapadas">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>490</y>
+      <width>181</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -938,7 +1003,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>68</x>
-     <y>541</y>
+     <y>640</y>
     </hint>
     <hint type="destinationlabel">
      <x>58</x>
@@ -954,7 +1019,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>121</x>
-     <y>554</y>
+     <y>639</y>
     </hint>
     <hint type="destinationlabel">
      <x>143</x>
@@ -970,7 +1035,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>193</x>
-     <y>535</y>
+     <y>639</y>
     </hint>
     <hint type="destinationlabel">
      <x>245</x>
@@ -986,7 +1051,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>246</x>
-     <y>539</y>
+     <y>639</y>
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
@@ -1000,5 +1065,7 @@
   <slot>pausarSimulacion()</slot>
   <slot>reiniciarSimulacion()</slot>
   <slot>pararSimulacion()</slot>
+  <slot>cambiarParametros()</slot>
+  <slot>actualizarDatos()</slot>
  </slots>
 </ui>

@@ -4,8 +4,43 @@
 FabricaWindow::FabricaWindow(QWidget *parent, Fabrica *fabrica) : QMainWindow(parent), ui(new Ui::FabricaWindow) {
     ui->setupUi(this);
     this->fabrica = fabrica;
-    //ahora tengo que modificar todos los contadores y números dentro de la ventana
+    this->imagen = false;
+    //coloco imágenes sin moverse dentro de la fábrica
 
+    QSize tamano(181,50);//creo una nueva referencia de tamaño
+    QMovie * bandaColocar = new QMovie(":/gifs/gifs/banda.gif");//creo una nueva película, que guardará los datos del gif
+    QMovie * bandaLimpias1 = new QMovie(":/gifs/gifs/banda.gif");//creo una nueva película, que guardará los datos del gif
+    QMovie * bandaLimpias2 = new QMovie(":/gifs/gifs/banda.gif");//creo una nueva película, que guardará los datos del gif
+    QMovie * bandaLlenas = new QMovie(":/gifs/gifs/banda.gif");//creo una nueva película, que guardará los datos del gif
+    QMovie * bandaEntapadas = new QMovie(":/gifs/gifs/banda.gif");//creo una nueva película, que guardará los datos del gif
+    if(bandaColocar->isValid()){//si logró crear la película en memoria
+        bandaColocar->setScaledSize(tamano);//le coloco el tamaño a la película para cambiarle el tamaño
+        this->ui->bandaColocadas->setMovie(bandaColocar);//luego coloco la película dentro del label donde tiene que ir
+        this->ui->bandaColocadas->movie()->start();
+    }
+    if(bandaLimpias1->isValid()){
+        bandaLimpias1->setScaledSize(tamano);
+        this->ui->bandaLimpias1->setMovie(bandaLimpias1);
+        this->ui->bandaColocadas->movie()->start();
+    }
+    if(bandaLimpias2->isValid()){
+        bandaLimpias2->setScaledSize(tamano);
+        this->ui->bandaLimpias2->setMovie(bandaLimpias2);
+        this->ui->bandaColocadas->movie()->start();
+    }
+    if(bandaLlenas->isValid()){
+        bandaLlenas->setScaledSize(tamano);
+        this->ui->bandaLlenas->setMovie(bandaLlenas);
+        this->ui->bandaColocadas->movie()->start();
+    }
+    if(bandaEntapadas->isValid()){
+        bandaEntapadas->setScaledSize(tamano);
+        this->ui->bandaEntapadas->setMovie(bandaEntapadas);
+        this->ui->bandaColocadas->movie()->start();
+    }
+    //todos los gifs colocados quedaron sin movimiento
+
+    //ahora tengo que modificar todos los contadores y números dentro de la ventana
     //tengo que colocar la velocidad a la que va cada hilo
     this->ui->velocidadColocador->setText(QString::number(this->fabrica->hiloColocaBotellas->tiempoDeCarga));
     this->ui->velocidadLimpiador->setText(QString::number(this->fabrica->hiloLimpiaBotellas->tiempoDeLimpieza));
@@ -21,6 +56,12 @@ FabricaWindow::FabricaWindow(QWidget *parent, Fabrica *fabrica) : QMainWindow(pa
     this->ui->contadoresLlenador2->setRowCount(this->fabrica->listaBotellas->largo());
     this->ui->contadoresEntapador->setRowCount(this->fabrica->listaBotellas->largo());
     this->ui->contadoresInspeccionador->setRowCount(this->fabrica->listaBotellas->largo());
+
+    this->ui->infoBandaColocadas->item(0,1)->setText(QString::number(this->fabrica->bandaColocadas->maximoBotellas));//coloco el máximo de botellas de la banda
+    this->ui->infoBandaLimpias1->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas1->maximoBotellas));//coloco el máximo de botellas de la banda
+    this->ui->infoBandaLimpias2->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas2->maximoBotellas));//coloco el máximo de botellas de la banda
+    this->ui->infoBandaLlenas->item(0,1)->setText(QString::number(this->fabrica->bandaLlenadas->maximoBotellas));
+    this->ui->infoBandaEntapadas->item(0,1)->setText(QString::number(this->fabrica->bandaEntapadas->maximoBotellas));
 
     //ahora tengo que colocar 0's en cada una de esas filas
     for(int i = 0; i < this->fabrica->listaBotellas->largo(); i++){
@@ -109,28 +150,108 @@ void FabricaWindow::pararSimulacion(){
  */
 void FabricaWindow::actualizarDatos(){
 
+    //modifico todos los gifs acorde a cómo va la simulación
+    //todos los gifs y datos necesarios
+    if(this->fabrica->hiloLimpiaBotellas->isWorking){
+        this->ui->bandaColocadas->movie()->setPaused(this->fabrica->bandaColocadas->primerBotella == NULL);//pausa el gif si es necesario
+    }
+    if(this->fabrica->hilollenaBotellas1->isWorking){
+        this->ui->bandaLimpias1->movie()->setPaused(this->fabrica->bandaLimpiadas1->primerBotella == NULL);//pausa el gif si es necesario
+    }
+    if(this->fabrica->hilollenaBotellas2->isWorking){
+        this->ui->bandaLimpias2->movie()->setPaused(this->fabrica->bandaLimpiadas2->primerBotella == NULL);//pausa el gif si es necesario
+    }
+    if(this->fabrica->hiloEntapador->isWorking){
+        this->ui->bandaEntapadas->movie()->setPaused(this->fabrica->bandaEntapadas->primerBotella == NULL);//pausa el gif si es necesario
+    }
+
+    this->ui->infoBandaColocadas->item(0,0)->setText(QString::number(this->fabrica->bandaColocadas->largo()));//coloco la cantidad de botellas actualmente en la banda
+    this->ui->infoBandaLimpias1->item(0,0)->setText(QString::number(this->fabrica->bandaLimpiadas1->largo()));//coloco la cantidad de botellas actualmente en la banda
+    this->ui->infoBandaLimpias2->item(0,0)->setText(QString::number(this->fabrica->bandaLimpiadas2->largo()));//coloco la cantidad de botellas actualmente en la banda
+    this->ui->infoBandaLlenas->item(0,0)->setText(QString::number(this->fabrica->bandaLlenadas->largo()));
+    this->ui->infoBandaEntapadas->item(0,0)->setText(QString::number(this->fabrica->bandaEntapadas->largo()));
+
+
     //coloco todos los contadores
     for(int i = 0; i < this->fabrica->listaBotellas->largo(); i++){
         this->ui->contadoresColocador->item(i,1)->setText(QString::number(this->fabrica->hiloColocaBotellas->contadores[i]));//coloco la cantidad de botellas colocadas respectivas
-        this->ui->infoBandaColocadas->item(0,0)->setText(QString::number(this->fabrica->bandaColocadas->largo()));//coloco la cantidad de botellas actualmente en la banda
-        this->ui->infoBandaColocadas->item(0,1)->setText(QString::number(this->fabrica->bandaColocadas->maximoBotellas));//coloco el máximo de botellas de la banda
         this->ui->contadoresLimpiador->item(i,1)->setText(QString::number(this->fabrica->hiloLimpiaBotellas->contadores[i]));//coloco la cantidad de botellas limpiadas respectivas
-        this->ui->infoBandaLimpias1->item(0,0)->setText(QString::number(this->fabrica->bandaLimpiadas1->largo()));//coloco la cantidad de botellas actualmente en la banda
-        this->ui->infoBandaLimpias1->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas1->maximoBotellas));//coloco el máximo de botellas de la banda
-        this->ui->infoBandaLimpias2->item(0,0)->setText(QString::number(this->fabrica->bandaLimpiadas2->largo()));//coloco la cantidad de botellas actualmente en la banda
-        this->ui->infoBandaLimpias2->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas2->maximoBotellas));//coloco el máximo de botellas de la banda
         this->ui->contadoresLlenador1->item(i,1)->setText(QString::number(this->fabrica->hilollenaBotellas1->contadores[i]));//coloco la cantidad de botellas llenas respectivas
         this->ui->contadoresLlenador2->item(i,1)->setText(QString::number(this->fabrica->hilollenaBotellas2->contadores[i]));//coloco la cantidad de botellas llenas respectivas
-        this->ui->infoBandaLlenas->item(0,0)->setText(QString::number(this->fabrica->bandaLlenadas->largo()));
-        this->ui->infoBandaLlenas->item(0,1)->setText(QString::number(this->fabrica->bandaLlenadas->maximoBotellas));
         this->ui->contadoresEntapador->item(i,1)->setText(QString::number(this->fabrica->hiloEntapador->contadores[i]));//coloco la cantidad de botellas entapadas respectivas
-        this->ui->infoBandaEntapadas->item(0,0)->setText(QString::number(this->fabrica->bandaEntapadas->largo()));
-        this->ui->infoBandaEntapadas->item(0,1)->setText(QString::number(this->fabrica->bandaEntapadas->maximoBotellas));
         this->ui->contadoresInspeccionador->item(i,1)->setText(QString::number(this->fabrica->hiloInspeccionador->contadoresAprobadas[i]));
         this->ui->contadoresInspeccionador->item(i,2)->setText(QString::number(this->fabrica->hiloInspeccionador->contadoresDesechadas[i]));
     }
 }
 
 void FabricaWindow::cambiarParametros(){
+    //tengo que actualizar las máquinas que se desea que estén en marcha ahora mismo
+    this->fabrica->hiloColocaBotellas->pausa = !this->ui->colocaBotellasActivo->isChecked();
+    this->fabrica->hiloLimpiaBotellas->pausa = !this->ui->limpiaBotellasActivo->isChecked();
+    this->fabrica->hilollenaBotellas1->pausa = !this->ui->llenaBotellasActivo1->isChecked();
+    this->fabrica->hilollenaBotellas2->pausa = !this->ui->llenaBotellasActivo2->isChecked();
+    this->fabrica->hiloEntapador->pausa = !this->ui->entapaBotellasActivo->isChecked();
+    this->fabrica->hiloInspeccionador->pausa = !this->ui->inspeccionaBotellasActivo->isChecked();
+
+    int probabilidadActual = 0;//si esto se vuelve diferente a 100, entonces los nuevos porcentajes de colocación
+    //no son apropiados, así que no actualiza los valores internos
+    for(int i = 0; i < this->fabrica->listaBotellas->largo(); i++){//tengo que revisar todas las filas de la tabla del colocador
+        if(probabilidadActual > 100 || this->ui->contadoresColocador->item(i,2)->text().compare("") == 0){//si se pasó de 100 o si no fue colocada información en una casilla entonces los valores no son apropiados
+            probabilidadActual = 0;//señal de error
+            break;//termina de recorrer
+        }
+        probabilidadActual+= this->ui->contadoresColocador->item(i,2)->text().toInt();//sigue sumando revisando los valores
+    }
+    //ahora tengo que revisar si dio menor a 100
+    if(probabilidadActual != 100){//no se deben actualizar los valores internos de la fábrica
+        //así que reinicio los contadores
+        for(int i = 0; i< this->fabrica->listaBotellas->largo();i++){
+            this->ui->contadoresColocador->item(i,2)->setText(QString::number(this->fabrica->listaBotellas->get(this->fabrica->listaBotellas->indexOf(this->ui->contadoresColocador->item(i,0)->text().toInt()))->botellaNodo->cantidadDeRefresco));
+        }
+    }
+    else{
+        //actualizo los valores internos de la fábrica, pues los datos son correctos
+        for(int i = 0; i < this->fabrica->listaBotellas->largo();i++){
+            this->fabrica->listaBotellas->get(this->fabrica->listaBotellas->indexOf(this->ui->contadoresColocador->item(i,0)->text().toInt()))->botellaNodo->probabilidadDeColocar = this->ui->contadoresColocador->item(i,2)->text().toInt();
+        }
+    }
+
+    //ahora los máximos de las bandas transportadoras
+    if(this->ui->infoBandaColocadas->item(0,1)->text().compare("") != 0){//hay algún cambio en el text edit
+        this->fabrica->bandaColocadas->maximoBotellas = this->ui->infoBandaColocadas->item(0,1)->text().toInt();//hace el campo en la fábrica igual al text edit
+    }
+    else{
+        //reinicio los valores externos al valor interno de la fábrica
+        this->ui->infoBandaColocadas->item(0,1)->setText(QString::number(this->fabrica->bandaColocadas->maximoBotellas));
+    }
+    if(this->ui->infoBandaLimpias1->item(0,1)->text().compare("") != 0){//hay algún cambio en el text edit
+        this->fabrica->bandaLimpiadas1->maximoBotellas = this->ui->infoBandaLimpias1->item(0,1)->text().toInt();//hace el campo en la fábrica igual al text edit
+    }
+    else{
+        //reinicio los valores externos al valor interno de la fábrica
+        this->ui->infoBandaLimpias1->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas1->maximoBotellas));
+    }
+    if(this->ui->infoBandaLimpias2->item(0,1)->text().compare("") != 0){//hay algún cambio en el text edit
+        this->fabrica->bandaLimpiadas2->maximoBotellas = this->ui->infoBandaLimpias2->item(0,1)->text().toInt();//hace el campo en la fábrica igual al text edit
+    }
+    else{
+        //reinicio los valores externos al valor interno de la fábrica
+        this->ui->infoBandaLimpias2->item(0,1)->setText(QString::number(this->fabrica->bandaLimpiadas2->maximoBotellas));
+    }
+    if(this->ui->infoBandaLlenas->item(0,1)->text().compare("") != 0){//hay algún cambio en el text edit
+        this->fabrica->bandaLlenadas->maximoBotellas = this->ui->infoBandaLlenas->item(0,1)->text().toInt();//hace el campo en la fábrica igual al text edit
+    }
+    else{
+        //reinicio los valores externos al valor interno de la fábrica
+        this->ui->infoBandaLlenas->item(0,1)->setText(QString::number(this->fabrica->bandaLlenadas->maximoBotellas));
+    }
+    if(this->ui->infoBandaEntapadas->item(0,1)->text().compare("") != 0){//hay algún cambio en el text edit
+        this->fabrica->bandaEntapadas->maximoBotellas = this->ui->infoBandaEntapadas->item(0,1)->text().toInt();//hace el campo en la fábrica igual al text edit
+    }
+    else{
+        //reinicio los valores externos al valor interno de la fábrica
+        this->ui->infoBandaEntapadas->item(0,1)->setText(QString::number(this->fabrica->bandaEntapadas->maximoBotellas));
+    }
+
 
 }

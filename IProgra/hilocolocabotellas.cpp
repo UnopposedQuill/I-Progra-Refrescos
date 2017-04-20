@@ -3,6 +3,7 @@
 HiloColocaBotellas::HiloColocaBotellas(ListaBotellas *listaBotellas, BandaBotellas *bandaColocar, int tiempoDeCarga)
 {
     this->activo = this->pausa = true;
+    this->isWorking = false;
     this->listaBotellas = listaBotellas;
     this->tiempoDeCarga = tiempoDeCarga;
     this->bandaColocar = bandaColocar;
@@ -15,6 +16,7 @@ void HiloColocaBotellas::run(){
     while(this->activo){
 
         mutex.lock();//bloquea el cpu para que ningún otro hilo se ejecute hasta que este se desbloquee
+        this->isWorking = true;//empieza el trabajo
         std::mt19937_64 generadorDeNumeros;//un generador de números
         generadorDeNumeros.seed(time(NULL));
         std::uniform_int_distribution<int> aleatorizadorEnteros(0, 99);//una clase que sabe ordenar números
@@ -35,7 +37,9 @@ void HiloColocaBotellas::run(){
 
         sleep(this->tiempoDeCarga);
         while(this->pausa){
+            this->isWorking = false;//cuando no está trabajando debo colocar esto en false
             sleep(1);
         }
     }
+    this->isWorking = false;//cuando no está trabajando debo colocar esto en false, eso también incluye si está activo, pero no puede trabajar
 }

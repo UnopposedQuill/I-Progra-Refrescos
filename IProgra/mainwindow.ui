@@ -42,16 +42,6 @@
       <string>2</string>
      </property>
     </row>
-    <row>
-     <property name="text">
-      <string>3</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>4</string>
-     </property>
-    </row>
     <column>
      <property name="text">
       <string>Cantidad de Refresco</string>
@@ -74,7 +64,7 @@
     </item>
     <item row="0" column="1">
      <property name="text">
-      <string>25</string>
+      <string>50</string>
      </property>
     </item>
     <item row="0" column="2">
@@ -89,42 +79,12 @@
     </item>
     <item row="1" column="1">
      <property name="text">
-      <string>25</string>
+      <string>50</string>
      </property>
     </item>
     <item row="1" column="2">
      <property name="text">
       <string>25</string>
-     </property>
-    </item>
-    <item row="2" column="0">
-     <property name="text">
-      <string>30</string>
-     </property>
-    </item>
-    <item row="2" column="1">
-     <property name="text">
-      <string>25</string>
-     </property>
-    </item>
-    <item row="2" column="2">
-     <property name="text">
-      <string>30</string>
-     </property>
-    </item>
-    <item row="3" column="0">
-     <property name="text">
-      <string>40</string>
-     </property>
-    </item>
-    <item row="3" column="1">
-     <property name="text">
-      <string>25</string>
-     </property>
-    </item>
-    <item row="3" column="2">
-     <property name="text">
-      <string>20</string>
      </property>
     </item>
    </widget>
@@ -614,6 +574,20 @@
   <tabstop>probabilidadDesecho</tabstop>
   <tabstop>nuevaBotella</tabstop>
   <tabstop>botellas</tabstop>
+  <tabstop>spinEliminar</tabstop>
+  <tabstop>eliminarBotella</tabstop>
+  <tabstop>tiempoColocacion</tabstop>
+  <tabstop>tiempoLimpieza</tabstop>
+  <tabstop>tiempoLlenado1</tabstop>
+  <tabstop>tiempoLlenado2</tabstop>
+  <tabstop>tiempoEntapado</tabstop>
+  <tabstop>tiempoInspeccion</tabstop>
+  <tabstop>capacidadColocadas</tabstop>
+  <tabstop>capacidadLimpias1</tabstop>
+  <tabstop>capacidadLimpias2</tabstop>
+  <tabstop>capacidadLlenas</tabstop>
+  <tabstop>capacidadEntapadas</tabstop>
+  <tabstop>Inicio</tabstop>
  </tabstops>
  <resources>
   <include location="recursos.qrc"/>

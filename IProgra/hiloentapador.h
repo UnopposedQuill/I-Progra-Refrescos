@@ -4,13 +4,13 @@
 #include <cstdlib>
 #include <iostream>
 #include <QMutex>
-#include "hilo.h"
+#include "hilomaquina.h"
 #include "botella.h"
 #include "colas.h"
 
 using namespace std;
 
-class HiloEntapador : public Hilo
+class HiloEntapador : public HiloMaquina
 {
 public:
     HiloEntapador(ListaBotellas * botellas,BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar, int tiempoDeEntapado);

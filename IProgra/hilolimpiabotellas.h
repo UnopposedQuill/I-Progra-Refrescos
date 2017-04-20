@@ -6,14 +6,14 @@
 #include <QMutex>
 #include <random>
 #include <QDebug>
-#include "hilo.h"
+#include "hilomaquina.h"
 #include "botella.h"
 #include "colas.h"
 
 
 using namespace std;
 
-class HiloLimpiaBotellas : public Hilo
+class HiloLimpiaBotellas : public HiloMaquina
 {
 public:
     HiloLimpiaBotellas(ListaBotellas * botellas,BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar1, BandaBotellas * bandaColocar2, int tiempoDeLimpieza);

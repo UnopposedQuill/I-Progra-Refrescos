@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <iostream>
 #include <cstdlib>
+#include <QMovie>//para poder colocar gifs en la ventana
+#include <QSize>//para poder reescalar los gifs
 #include "fabrica.h"//para que pueda trabajar con una fábrica
 #include "hiloactualizador.h"//para que pueda actualizar los contadores visuales
 
@@ -28,6 +30,7 @@ public slots:
     void cambiarParametros();
 
 public:
+    bool imagen;
     explicit FabricaWindow(QWidget * parent = 0, Fabrica * fabrica = NULL);
     ~FabricaWindow();
     Fabrica * fabrica;

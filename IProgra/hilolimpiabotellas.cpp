@@ -3,6 +3,7 @@
 HiloLimpiaBotellas::HiloLimpiaBotellas(ListaBotellas *botellas, BandaBotellas * bandaEntrada, BandaBotellas * bandaColocar1, BandaBotellas *bandaColocar2, int tiempoDeLimpieza)
 {
     this->activo = this->pausa = true;
+    this->isWorking = false;
     this->bandaEntrada = bandaEntrada;
     this->bandaColocar1 = bandaColocar1;
     this->bandaColocar2 = bandaColocar2;
@@ -19,6 +20,7 @@ void HiloLimpiaBotellas::run(){
         mutex.lock();//bloquea el cpu para que ningún otro hilo se ejecute hasta que este se desbloquee
         if(this->bandaEntrada->primerBotella != NULL && (this->bandaColocar1->largo() < this->bandaColocar1->maximoBotellas || (this->bandaColocar2->largo() < this->bandaColocar2->maximoBotellas))){//hay algo en la banda transportadora de entrada, y el máximo de la banda de salida no ha sido alcanzado
 
+            this->isWorking = true;//empezó a trabajar
             Botella * botellaEntrada = this->bandaEntrada->removerRetornarPrimerBotella()->botellaCola;
             if(botellaEntrada != NULL){//por si acaso
 
@@ -36,12 +38,16 @@ void HiloLimpiaBotellas::run(){
                 this->contadores[this->listaBotellas->indexOf(botellaEntrada->cantidadDeRefresco)]++;//agrego 1 al contador correspondiente
             }
         }
+        else{
+            this->isWorking = false;//no logró empezar su trabajo
+        }
         mutex.unlock();//desbloquea
 
         sleep(this->tiempoDeLimpieza);
-
         while(this->pausa){
+            this->isWorking = false;//no está trabajando
             sleep(1);
         }
     }
+    this->isWorking = false;//no está trabajando
 }

@@ -75,6 +75,11 @@ public:
     QTableWidget *infoBandaLimpias2;
     QTableWidget *infoBandaLlenas;
     QTableWidget *infoBandaEntapadas;
+    QLabel *bandaColocadas;
+    QLabel *bandaLimpias1;
+    QLabel *bandaLimpias2;
+    QLabel *bandaLlenas;
+    QLabel *bandaEntapadas;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -385,6 +390,21 @@ public:
         infoBandaEntapadas->setGeometry(QRect(690, 590, 161, 51));
         infoBandaEntapadas->horizontalHeader()->setDefaultSectionSize(79);
         infoBandaEntapadas->verticalHeader()->setVisible(false);
+        bandaColocadas = new QLabel(centralwidget);
+        bandaColocadas->setObjectName(QStringLiteral("bandaColocadas"));
+        bandaColocadas->setGeometry(QRect(350, 100, 181, 50));
+        bandaLimpias1 = new QLabel(centralwidget);
+        bandaLimpias1->setObjectName(QStringLiteral("bandaLimpias1"));
+        bandaLimpias1->setGeometry(QRect(730, 140, 181, 50));
+        bandaLimpias2 = new QLabel(centralwidget);
+        bandaLimpias2->setObjectName(QStringLiteral("bandaLimpias2"));
+        bandaLimpias2->setGeometry(QRect(1120, 140, 181, 50));
+        bandaLlenas = new QLabel(centralwidget);
+        bandaLlenas->setObjectName(QStringLiteral("bandaLlenas"));
+        bandaLlenas->setGeometry(QRect(920, 360, 181, 50));
+        bandaEntapadas = new QLabel(centralwidget);
+        bandaEntapadas->setObjectName(QStringLiteral("bandaEntapadas"));
+        bandaEntapadas->setGeometry(QRect(670, 490, 181, 50));
         FabricaWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(FabricaWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -545,6 +565,11 @@ public:
         ___qtablewidgetitem39->setText(QApplication::translate("FabricaWindow", "0", 0));
         infoBandaEntapadas->setSortingEnabled(__sortingEnabled4);
 
+        bandaColocadas->setText(QString());
+        bandaLimpias1->setText(QString());
+        bandaLimpias2->setText(QString());
+        bandaLlenas->setText(QString());
+        bandaEntapadas->setText(QString());
     } // retranslateUi
 
 };

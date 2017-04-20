@@ -5,7 +5,7 @@
 #include <iostream>
 #include <QMutex>
 #include <random>
-#include "hilo.h"
+#include "hilomaquina.h"
 #include "botella.h"
 #include "colas.h"
 #include "hiloinspeccionador.h"
@@ -17,7 +17,7 @@ using namespace std;
  * Como la banda transportadora que tiene el inspector está divida en 2 tengo que hacer que actúe como una sola banda, para eso existe este hilo
  * Este hilo entra en acción cuando el inspector está en pausa o está apagado, moviendo las botellas de una banda a otra
  */
-class HiloTransportador : public Hilo
+class HiloTransportador : public HiloMaquina
 {
 public:
     HiloTransportador(ListaBotellas * botellas,BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar, HiloInspeccionador * hiloInspeccionadorASustituir);

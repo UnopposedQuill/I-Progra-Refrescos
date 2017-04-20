@@ -3,6 +3,7 @@
 HiloInspeccionador::HiloInspeccionador(ListaBotellas * botellas, BandaBotellas * bandaEntrada, BandaBotellas* bandaColocar, int tiempoDeInspeccion)
 {
     this->activo = this->pausa = true;
+    this->isWorking = false;
     this->bandaEntrada = bandaEntrada;
     this->bandaColocar = bandaColocar;
     this->listaBotellas = botellas;
@@ -17,6 +18,7 @@ void HiloInspeccionador::run(){
         mutex.lock();
 
         if(this->bandaEntrada->primerBotella != NULL){//si se puede realizar el proceso de inspección, entonces, inicia el proceso de inspección
+            this->isWorking = true;//empieza el trabajo
             Botella * botellaNodo = this->bandaEntrada->removerRetornarPrimerBotella()->botellaCola;
             if(botellaNodo != NULL){//por si acaso
                 //ahora tiene que evaluar si desecha o no la botella conseguida
@@ -37,11 +39,16 @@ void HiloInspeccionador::run(){
                 }
             }
         }
+        else{
+            this->isWorking = false;//no logró empezar a trabajar
+        }
         mutex.unlock();
 
         sleep(this->tiempoDeInspeccion);
         while(this->pausa){
+            this->isWorking = false;//no está trabajando
             sleep(1);
         }
     }
+    this->isWorking = false;//no está trabajando
 }

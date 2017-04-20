@@ -5,4 +5,7 @@
         <file>botones/Cuadro Parar.jpg</file>
         <file>botones/pausa azul.jpg</file>
     </qresource>
+    <qresource prefix="/gifs">
+        <file>gifs/banda.gif</file>
+    </qresource>
 </RCC>
