@@ -419,6 +419,13 @@ public:
         QObject::connect(pausarSimulacion, SIGNAL(clicked()), FabricaWindow, SLOT(pausarSimulacion()));
         QObject::connect(reiniciarSimulacion, SIGNAL(clicked()), FabricaWindow, SLOT(reiniciarSimulacion()));
         QObject::connect(pararSimulacion, SIGNAL(clicked()), FabricaWindow, SLOT(pararSimulacion()));
+        QObject::connect(cambiarParametros, SIGNAL(clicked()), FabricaWindow, SLOT(cambiarParametros()));
+        QObject::connect(colocaBotellasActivo, SIGNAL(stateChanged(int)), FabricaWindow, SLOT(cambiarParametros()));
+        QObject::connect(limpiaBotellasActivo, SIGNAL(stateChanged(int)), FabricaWindow, SLOT(cambiarParametros()));
+        QObject::connect(llenaBotellasActivo2, SIGNAL(stateChanged(int)), FabricaWindow, SLOT(cambiarParametros()));
+        QObject::connect(llenaBotellasActivo1, SIGNAL(stateChanged(int)), FabricaWindow, SLOT(cambiarParametros()));
+        QObject::connect(entapaBotellasActivo, SIGNAL(stateChanged(int)), FabricaWindow, SLOT(cambiarParametros()));
+        QObject::connect(inspeccionaBotellasActivo, SIGNAL(stateChanged(int)), FabricaWindow, SLOT(cambiarParametros()));
 
         QMetaObject::connectSlotsByName(FabricaWindow);
     } // setupUi

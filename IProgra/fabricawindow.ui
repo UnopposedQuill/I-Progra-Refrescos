@@ -1059,6 +1059,118 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cambiarParametros</sender>
+   <signal>clicked()</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>658</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>489</x>
+     <y>673</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>colocaBotellasActivo</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>268</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>limpiaBotellasActivo</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>968</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1127</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>llenaBotellasActivo2</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1181</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1042</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>llenaBotellasActivo1</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>862</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>981</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>entapaBotellasActivo</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1037</x>
+     <y>553</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1189</x>
+     <y>540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>inspeccionaBotellasActivo</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>FabricaWindow</receiver>
+   <slot>cambiarParametros()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>414</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>540</x>
+     <y>473</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>iniciarSimulacion()</slot>

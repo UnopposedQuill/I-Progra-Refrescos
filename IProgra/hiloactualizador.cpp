@@ -65,9 +65,6 @@ void HiloActualizador::run(){
         }
     }
 
-    QObject::connect(this,SIGNAL(actualizar()),this->ventanaAActualizar,SLOT(actualizarDatos()));
-    QMetaObject::connectSlotsByName(this->ventanaAActualizar);
-
     while(this->activo){
         sleep(1);
 
